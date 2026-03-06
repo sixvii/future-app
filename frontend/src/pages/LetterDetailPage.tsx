@@ -63,10 +63,6 @@ const LetterDetailPage = () => {
   const handleDelete = async () => {
     try {
       await deleteLetter(letter.id);
-      toast({
-        title: "🗑️ Letter Deleted",
-        description: `"${letter.title}" has been removed.`,
-      });
       navigate(-1);
     } catch (error) {
       toast({

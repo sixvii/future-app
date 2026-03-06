@@ -24,11 +24,6 @@ const CreateLetterPage = () => {
         deliveryDate: new Date(deliveryDate).toISOString(),
         recipientPhone: recipientPhone || undefined,
       });
-
-      toast({
-        title: "✉️ Letter Scheduled!",
-        description: `"${title}" will be delivered on ${new Date(deliveryDate).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}.`,
-      });
       navigate("/");
     } catch (error) {
       toast({

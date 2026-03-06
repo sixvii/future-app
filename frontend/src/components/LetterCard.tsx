@@ -1,9 +1,10 @@
-import { Timer, Trash2 } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import { Letter, formatDate, getCountdownText, isDelivered, deleteLetter } from "@/lib/letters";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
+import clockImg from "@/assets/images/clock.png";
 
 interface LetterCardProps {
   letter: Letter;
@@ -30,10 +31,6 @@ const LetterCard = ({ letter, index, onDelete }: LetterCardProps) => {
     setIsDeleting(true);
     try {
       await deleteLetter(letter.id);
-      toast({
-        title: "Letter deleted",
-        description: '"' + letter.title + '" has been deleted.',
-      });
       onDelete?.();
     } catch (error) {
       toast({
@@ -94,7 +91,11 @@ const LetterCard = ({ letter, index, onDelete }: LetterCardProps) => {
           {letter.status === "delivered" || isDelivered(letter.deliveryDate) ? (
             <span className="text-xs text-green-600 dark:text-green-400 font-medium">✓</span>
           ) : (
-            <Timer size={18} className="text-primary" />
+            <img
+              src={clockImg}
+              alt="Pending"
+              className="w-5 h-5 md:w-[18px] md:h-[18px] object-contain brightness-0 invert"
+            />
           )}
         </div>
       </motion.div>

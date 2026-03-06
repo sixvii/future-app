@@ -50,13 +50,11 @@ const SettingsPage = () => {
       setPasscode(passcodeInput);
       setPasscodeEnabled(true);
       setShowPasscodeModal(false);
-      toast({ title: "🔒 Passcode Set", description: "Your letters are now protected." });
     } else if (passcodeStep === "remove") {
       if (verifyPasscode(passcodeInput)) {
         removePasscode();
         setPasscodeEnabled(false);
         setShowPasscodeModal(false);
-        toast({ title: "🔓 Passcode Removed" });
       } else {
         toast({ title: "Incorrect passcode" });
         setPasscodeInput("");
@@ -90,17 +88,19 @@ const SettingsPage = () => {
 
   return (
     <div className="min-h-screen bg-background pb-28">
-      <div className="max-w-5xl mx-auto px-5">
-        {/* Sticky Header */}
-        <div className="sticky top-0 z-40 bg-background pt-14 pb-4">
+      <div className="fixed top-0 left-0 right-0 z-40 bg-background">
+        <div className="max-w-5xl mx-auto px-5 pt-12 pb-4">
           <motion.h1
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-[34px] font-bold text-foreground"
+            className="md:text-[34px] text-[24px] font-bold text-foreground"
           >
             Settings
           </motion.h1>
         </div>
+      </div>
+
+      <div className="max-w-5xl mx-auto px-5 pt-24">
 
         {/* Profile section */}
         <motion.div

@@ -56,7 +56,6 @@ const ProfilePage = () => {
     try {
       setSaving(true);
       await updateProfile(name.trim(), gender);
-      toast({ title: "Profile updated" });
     } catch (error) {
       toast({
         title: "Update failed",
