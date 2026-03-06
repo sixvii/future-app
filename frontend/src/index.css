@@ -97,60 +97,117 @@
     --progress-track: 0 0% 80%;
     --letter-accent: 27 76% 50%;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
+    box-sizing: border-box;
   }
 
-  html,
-  body,
-  #root {
+  html {
     width: 100%;
     max-width: 100%;
     overflow-x: clip;
+    position: relative;
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
 
   body {
     @apply bg-background text-foreground font-poppins;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
     font-size: 15px;
-    overflow-x: hidden;
-    -webkit-text-size-adjust: 100%;
+    position: relative;
+    margin: 0;
+    padding: 0;
   }
 
-  /* Prevent iOS Safari zoom/jitter when focusing form fields on mobile. */
+  #root {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+    position: relative;
+  }
+
+  /* Hide all scrollbars on mobile */
   @media (max-width: 768px) {
+    /* Prevent iOS Safari zoom/jitter when focusing form fields */
     input,
     textarea,
     select {
       font-size: 16px;
     }
-    
-      *::-webkit-scrollbar {
-        width: 0;
-        height: 0;
-        display: none;
-      }
 
-      .hide-mobile-scrollbar {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-      }
+    /* Hide scrollbars for all elements */
+    * {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
 
-      .hide-mobile-scrollbar::-webkit-scrollbar {
-        -webkit-appearance: none;
-        width: 0;
-        height: 0;
-        display: none;
-        background: transparent;
-      }
+    *::-webkit-scrollbar {
+      width: 0 !important;
+      height: 0 !important;
+      display: none !important;
+    }
+
+    /* Ensure body and html don't show scrollbars */
+    html::-webkit-scrollbar,
+    body::-webkit-scrollbar {
+      display: none !important;
+    }
+
+    html,
+    body {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Hide scrollbars for utility class */
+    .hide-mobile-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .hide-mobile-scrollbar::-webkit-scrollbar {
+      display: none !important;
+    }
+
+    /* Hide scrollbars on overflow containers */
+    div::-webkit-scrollbar,
+    section::-webkit-scrollbar,
+    main::-webkit-scrollbar {
+      display: none !important;
+    }
+  }
+
+  /* Additional mobile container fixes */
+  @media (max-width: 640px) {
+    .max-w-5xl {
+      max-width: 100vw;
+    }
   }
 }
 
 @layer utilities {
   .text-min {
     font-size: 15px;
+  }
+
+  /* Prevent content from causing horizontal scroll on mobile */
+  .mobile-contain {
+    max-width: 100vw;
+    overflow-x: clip;
+  }
+
+  /* Ensure text wraps properly on mobile */
+  @media (max-width: 640px) {
+    .truncate-mobile {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
 }
 
